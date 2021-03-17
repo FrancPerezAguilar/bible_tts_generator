@@ -1,12 +1,11 @@
 from bs4 import BeautifulSoup
 import requests
 import gtts
-from playsound import playsound
 
-for i in range(34, 35):
+for i in range(3, 24):
     textString = ""
     req = requests.get(
-        f"https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/5/{i}#study=discover"
+        f"https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/6/{i}#study=discover"
     )
     soup = BeautifulSoup(req.text, "html.parser")
 
@@ -19,9 +18,13 @@ for i in range(34, 35):
 
     textString = textString.replace("+", "")
     textString = textString.replace("*", "")
+    textString = textString.replace("  ", " ")
 
     textString = "".join([i for i in textString if not i.isdigit()])
 
-    tts = gtts.gTTS(textString, lang="es")
+    try:
+        tts = gtts.gTTS(textString, lang="es")
 
-    tts.save(f"deutoronomio_{i}.mp3")
+        tts.save(f"josue_{i}.mp3")
+    except:
+        print(f"josue_{i} has been saved")
