@@ -2,10 +2,12 @@ from bs4 import BeautifulSoup
 import requests
 import gtts
 
-for i in range(3, 24):
+num_book = 9
+
+for i in range(1, 32):
     textString = ""
     req = requests.get(
-        f"https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/6/{i}#study=discover"
+        f"https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/{num_book}/{i}#study=discover"
     )
     soup = BeautifulSoup(req.text, "html.parser")
 
@@ -25,6 +27,6 @@ for i in range(3, 24):
     try:
         tts = gtts.gTTS(textString, lang="es")
 
-        tts.save(f"josue_{i}.mp3")
+        tts.save(f"{num_book}_{i}.mp3")
     except:
-        print(f"josue_{i} has been saved")
+        print(f"{num_book}_{i} has been saved")
